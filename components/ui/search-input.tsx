@@ -31,7 +31,7 @@ export const SearchInput = ({
     const { contains } = useFilter({ sensitivity: 'base' });
     const router = useRouter();
 
-    const { collection, filter, reset } = useListCollection({
+    const { collection, filter } = useListCollection({
         initialItems,
         filter: contains,
     });
@@ -49,8 +49,6 @@ export const SearchInput = ({
                         ? router.push(item.href)
                         : undefined,
                 );
-
-                reset();
             }}
         >
             <ComboboxControl showIndicator={false}>

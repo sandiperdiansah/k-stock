@@ -2,6 +2,11 @@ import { Field } from '@/components/ui/field';
 import { Link } from '@/components/ui/link';
 import { PasswordInput } from '@/components/ui/password-input';
 import { Box, Button, Heading, Input, Text } from '@chakra-ui/react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Sign Up',
+};
 
 const Page = () => {
     return (
@@ -11,11 +16,9 @@ const Page = () => {
                     fontSize="2xl"
                     fontWeight="semibold"
                 >
-                    Sign In
+                    Sign Up
                 </Heading>
-                <Text color="fg.muted">
-                    Welcome back! Please enter your details to sign in.
-                </Text>
+                <Text color="fg.muted">Create your account to get started.</Text>
             </Box>
 
             <Box
@@ -24,7 +27,16 @@ const Page = () => {
             >
                 <form>
                     <Field
+                        label="Name"
+                        required
+                        errorText="aduh error"
+                    >
+                        <Input placeholder="Enter your name" />
+                    </Field>
+
+                    <Field
                         label="Email"
+                        required
                         errorText="aduh error"
                     >
                         <Input placeholder="Enter your email" />
@@ -32,28 +44,22 @@ const Page = () => {
 
                     <Field
                         label="Password"
+                        required
                         errorText="aduh error"
                     >
                         <PasswordInput placeholder="Enter your password" />
                     </Field>
 
-                    <Box
-                        display="flex"
-                        justifyContent="end"
-                    >
-                        <Link
-                            href="/auth/forgot-password"
-                            fontSize="sm"
-                            textUnderlineOffset={4}
-                            _hover={{ textDecor: 'underline' }}
-                        >
-                            Forgot password
-                        </Link>
-                    </Box>
-
-                    <Button w="full">Sign In</Button>
+                    <Button w="full">Sign Up</Button>
                     <Text textAlign="center">
-                        Don’t have an account? <Link href="/auth/sign-up">Sign Up</Link>
+                        Already have an account?{' '}
+                        <Link
+                            href="/auth/sign-in"
+                            _hover={{ textDecor: 'underline' }}
+                            textUnderlineOffset={4}
+                        >
+                            Sign In
+                        </Link>
                     </Text>
                 </form>
             </Box>

@@ -1,10 +1,10 @@
-import { OrderSummary } from '@/components/OrderSummary';
 import { OverView } from '@/components/OverView';
 import { ProductLowStock } from '@/components/ProductLowStock';
 import { ProductTopSelling } from '@/components/ProductTopSelling';
-import { SalesAndPurchase } from '@/components/SalesAndPurchase';
 import { formattedCurrency } from '@/utils/formatted';
 import { Grid, GridItem } from '@chakra-ui/react';
+import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import {
     FiBarChart2,
     FiCreditCard,
@@ -18,6 +18,22 @@ import {
     FiUsers,
     FiXCircle,
 } from 'react-icons/fi';
+
+export const metadata: Metadata = {
+    title: 'Dashboard',
+    robots: {
+        index: false,
+        follow: false,
+    },
+};
+
+const SalesAndPurchase = dynamic(() =>
+    import('@/components/SalesAndPurchase').then((md) => md.SalesAndPurchase),
+);
+
+const OrderSummary = dynamic(() =>
+    import('@/components/OrderSummary').then((md) => md.OrderSummary),
+);
 
 const Page = () => {
     return (

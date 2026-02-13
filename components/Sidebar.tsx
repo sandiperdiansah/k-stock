@@ -72,10 +72,9 @@ export const useSidebarContext = (): SidebarContextProps => {
 export const Sidebar = (
     props: Omit<BoxProps, 'as' | 'w' | 'width'> & {
         width?: number | string | { open?: number | string; closed?: number | string };
-        defaultOpen?: boolean;
     },
 ) => {
-    const { width = { open: 290, closed: 0 }, defaultOpen, ...rest } = props;
+    const { width = { open: 290, closed: 0 }, ...rest } = props;
     const { open, onClose, onOpen } = useSidebarContext();
     const resolvedWidth =
         typeof width === 'string' || typeof width === 'number'
@@ -105,12 +104,12 @@ export const Sidebar = (
     useEffect(() => {
         if (typeof window === 'undefined') return;
 
-        const isMobile = window.matchMedia('(max-width: 1023px)').matches;
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-        if (!open && !isMobile && defaultOpen) {
+        if (!isMobile) {
             onOpen();
         }
-    }, [open, defaultOpen, onOpen]);
+    }, [onOpen]);
 
     return (
         <Box

@@ -4,11 +4,12 @@ import { Box, Grid, GridItem, Heading } from '@chakra-ui/react';
 const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <Grid
-            as="main"
             minH="svh"
-            templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }}
+            templateColumns={{ base: '1fr', lg: '1fr 1fr' }}
             alignItems="center"
+            placeContent="center"
             p={{ base: 5, lg: 0 }}
+            gap={{ base: 16, lg: 0 }}
         >
             <GridItem
                 as="section"
@@ -16,15 +17,16 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 spaceY={8}
             >
                 <Image
-                    src="/images/logo.png"
+                    src="/logo.png"
                     alt="Logo"
-                    width="250px"
-                    height="270px"
+                    width={{ base: '180px', lg: '250px' }}
+                    height={{ base: '200px', lg: '270px' }}
                 />
 
                 <Heading
+                    color="primary"
                     fontSize="5xl"
-                    fontWeight="semibold"
+                    fontWeight="bold"
                 >
                     {process.env.NEXT_PUBLIC_APP_NAME}
                 </Heading>
@@ -34,8 +36,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 <Box
                     w="full"
                     minW="sm"
-                    maxW={{ lg: 'sm' }}
+                    maxW={{ md: 'sm' }}
                     spaceY={6}
+                    mx={{ md: 'auto', lg: 0 }}
                 >
                     {children}
                 </Box>

@@ -22,27 +22,27 @@ const items: ItemType[] = [
     },
     {
         label: 'Inventory',
-        href: '/inventory',
+        href: '/dashboard/inventory',
         icon: <FiBox size={22} />,
     },
     {
         label: 'Reports',
-        href: '/reports',
+        href: '/dashboard/reports',
         icon: <FiBarChart2 size={22} />,
     },
     {
         label: 'Suppliers',
-        href: '/suppliers',
+        href: '/dashboard/suppliers',
         icon: <FiUsers size={22} />,
     },
     {
         label: 'Orders',
-        href: '/orders',
+        href: '/dashboard/orders',
         icon: <FiShoppingCart size={22} />,
     },
     {
         label: 'Stores',
-        href: '/stores',
+        href: '/dashboard/stores',
         icon: <LuStore size={22} />,
     },
 ];
@@ -50,7 +50,7 @@ const items: ItemType[] = [
 const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <SidebarContextProvider>
-            <Sidebar defaultOpen>
+            <Sidebar>
                 <SidebarHeader>
                     <Link
                         href="/dashboard"
@@ -59,15 +59,16 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                         gap={3}
                     >
                         <Image
-                            src="/images/logo.png"
+                            src="/logo.png"
                             alt="Logo"
                             width="40px"
                             height="40px"
                         />
                         <Span
+                            color="primary"
                             display="inline-block"
                             fontSize="2xl"
-                            fontWeight={600}
+                            fontWeight="bold"
                         >
                             {process.env.NEXT_PUBLIC_APP_NAME}
                         </Span>
@@ -116,7 +117,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                         <ScrollArea.Content
                             as="main"
                             p={5}
-                            pb={{ base: 28, lg: 0 }}
+                            pb={28}
                             spaceY={5}
                         >
                             {children}

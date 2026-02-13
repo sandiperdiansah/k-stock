@@ -1,5 +1,10 @@
 import { Field } from '@/components/ui/field';
 import { Box, Button, Heading, Input, Text } from '@chakra-ui/react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Forgot Password',
+};
 
 const Page = () => {
     return (

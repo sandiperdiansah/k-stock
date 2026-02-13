@@ -10,7 +10,12 @@ import {
     Span,
     Text,
 } from '@chakra-ui/react';
+import { Metadata } from 'next';
 import { FiSend } from 'react-icons/fi';
+
+export const metadata: Metadata = {
+    title: 'Reset Password',
+};
 
 const Page = () => {
     const p = true;

@@ -72,10 +72,11 @@ export const useSidebarContext = (): SidebarContextProps => {
 export const Sidebar = (
     props: Omit<BoxProps, 'as' | 'w' | 'width'> & {
         width?: number | string | { open?: number | string; closed?: number | string };
+        defaultOpen?: boolean;
     },
 ) => {
-    const { width = { open: 290, closed: 0 }, ...rest } = props;
-    const { open, onClose } = useSidebarContext();
+    const { width = { open: 290, closed: 0 }, defaultOpen, ...rest } = props;
+    const { open, onClose, onOpen } = useSidebarContext();
     const resolvedWidth =
         typeof width === 'string' || typeof width === 'number'
             ? width
@@ -92,12 +93,24 @@ export const Sidebar = (
         const isMobile = window.matchMedia('(max-width: 1023px)').matches;
         const pathnameChanged = prevPathnameRef.current !== pathname;
 
+        console.log(prevPathnameRef.current);
+
         if (open && isMobile && pathnameChanged) {
             onClose();
         }
 
         prevPathnameRef.current = pathname;
     }, [pathname, open, onClose]);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        const isMobile = window.matchMedia('(max-width: 1023px)').matches;
+
+        if (!open && !isMobile && defaultOpen) {
+            onOpen();
+        }
+    }, [open, defaultOpen, onOpen]);
 
     return (
         <Box
@@ -124,6 +137,7 @@ export const SidebarHeader = ({ ...props }: Omit<BoxProps, 'as'>) => {
             py={6}
             px={8}
             flexShrink={0}
+            whiteSpace="nowrap"
             {...props}
         />
     );
@@ -145,6 +159,7 @@ export const SidebarBody = ({ children, ...props }: Omit<ScrollAreaRootProps, 'a
         <ScrollArea.Root
             flex={1}
             aria-label="Sidebar menu"
+            flexWrap="nowrap"
             {...props}
         >
             <ScrollArea.Viewport>
@@ -167,6 +182,7 @@ export const SidebarFooter = ({ ...props }: Omit<BoxProps, 'as'>) => {
             py={6}
             px={8}
             flexShrink={0}
+            flexWrap="nowrap"
             {...props}
         />
     );

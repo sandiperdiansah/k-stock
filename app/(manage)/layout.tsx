@@ -50,7 +50,7 @@ const items: ItemType[] = [
 const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <SidebarContextProvider>
-            <Sidebar>
+            <Sidebar defaultOpen>
                 <SidebarHeader>
                     <Link
                         href="/dashboard"

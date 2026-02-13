@@ -1,11 +1,24 @@
 'use client';
 
 import { SidebarTrigger } from '@/components/Sidebar';
-import { Avatar } from '@/components/ui/avatar';
-import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from '@/components/ui/menu';
 import { SearchInput } from '@/components/ui/search-input';
-import { Box, IconButton } from '@chakra-ui/react';
-import { IoIosNotificationsOutline } from 'react-icons/io';
+import { Box } from '@chakra-ui/react';
+import { NotificationPopover } from './NotificationPopover';
+import { UserAvatar } from './UserAvatar';
+
+const frameworks = [
+    { label: 'React', value: 'react', href: 'https://react.dev' },
+    { label: 'Solid', value: 'solid', href: 'https://solidjs.com' },
+    { label: 'Vue', value: 'vue', href: 'https://vuejs.org' },
+    { label: 'Angular', value: 'angular', href: 'https://angular.io' },
+    { label: 'Svelte', value: 'svelte', href: 'https://svelte.dev' },
+    { label: 'Preact', value: 'preact', href: 'https://preactjs.com' },
+    { label: 'Qwik', value: 'qwik', href: 'https://qwik.builder.io' },
+    { label: 'Lit', value: 'lit', href: 'https://lit.dev' },
+    { label: 'Alpine.js', value: 'alpinejs', href: 'https://alpinejs.dev' },
+    { label: 'Ember', value: 'ember', href: 'https://emberjs.com' },
+    { label: 'Next.js', value: 'nextjs', href: 'https://nextjs.org' },
+];
 
 export const Header = () => {
     return (
@@ -26,42 +39,18 @@ export const Header = () => {
             >
                 <SidebarTrigger />
                 <SearchInput
-                    placeholder="Search product, supplier, order"
-                    name="search"
+                    initialItems={frameworks}
+                    placeholder="search product, supplier, order"
                 />
             </Box>
 
             <Box
                 display="flex"
                 alignItems="center"
-                gap={{ base: 2, md: 3 }}
+                gap={{ base: 3, md: 4 }}
             >
-                <IconButton
-                    variant="outline"
-                    rounded="full"
-                    size="sm"
-                >
-                    <IoIosNotificationsOutline />
-                </IconButton>
-
-                <MenuRoot positioning={{ placement: 'bottom-start' }}>
-                    <MenuTrigger
-                        rounded="full"
-                        focusRing="none"
-                        cursor="pointer"
-                        aria-label="Show menu avatar"
-                    >
-                        <Avatar
-                            name={process.env.NEXT_PUBLIC_IMAGE_FALLBACK_NAME}
-                            src="https://placehold.co/200x200"
-                        />
-                    </MenuTrigger>
-                    <MenuContent>
-                        <MenuItem value="account">Account</MenuItem>
-                        <MenuItem value="settings">Settings</MenuItem>
-                        <MenuItem value="logout">Logout</MenuItem>
-                    </MenuContent>
-                </MenuRoot>
+                <NotificationPopover />
+                <UserAvatar />
             </Box>
         </Box>
     );

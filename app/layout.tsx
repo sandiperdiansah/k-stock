@@ -53,6 +53,7 @@ export const metadata: Metadata = {
         apple: '/apple-touch-icon.png',
     },
     manifest: '/site.webmanifest',
+    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL!),
 };
 
 const Layout = ({ children }: { children: React.ReactNode }) => {

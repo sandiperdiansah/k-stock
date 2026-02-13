@@ -1,6 +1,6 @@
-import { OverView } from '@/components/OverView';
-import { ProductLowStock } from '@/components/ProductLowStock';
-import { ProductTopSelling } from '@/components/ProductTopSelling';
+import { OverView } from '@/components/management/OverView';
+import { ProductLowStock } from '@/components/management/ProductLowStock';
+import { ProductTopSelling } from '@/components/management/ProductTopSelling';
 import { formattedCurrency } from '@/utils/formatted';
 import { Grid, GridItem } from '@chakra-ui/react';
 import { Metadata } from 'next';
@@ -28,11 +28,11 @@ export const metadata: Metadata = {
 };
 
 const SalesAndPurchase = dynamic(() =>
-    import('@/components/SalesAndPurchase').then((md) => md.SalesAndPurchase),
+    import('@/components/management/SalesAndPurchase').then((md) => md.SalesAndPurchase),
 );
 
 const OrderSummary = dynamic(() =>
-    import('@/components/OrderSummary').then((md) => md.OrderSummary),
+    import('@/components/management/OrderSummary').then((md) => md.OrderSummary),
 );
 
 const Page = () => {

@@ -1,5 +1,5 @@
 import { Box, Span } from '@chakra-ui/react';
-import { Link } from './ui/link';
+import { Link } from '../ui/link';
 
 export const ProductTopSelling = () => {
     return (

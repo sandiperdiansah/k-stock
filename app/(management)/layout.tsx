@@ -1,11 +1,11 @@
-import { Header } from '@/components/Header';
+import { Header } from '@/components/management/Header';
 import {
     Sidebar,
     SidebarBody,
     SidebarContextProvider,
     SidebarFooter,
     SidebarHeader,
-} from '@/components/Sidebar';
+} from '@/components/management/Sidebar';
 import { Image } from '@/components/ui/image';
 import { Link } from '@/components/ui/link';
 import { ItemType } from '@/types';

@@ -15,7 +15,7 @@ export const UserAvatar = () => {
                     src="https://placehold.co/200x200"
                 />
             </MenuTrigger>
-            <MenuContent w={{ base: '3xs', lg: 'sm' }}>
+            <MenuContent w="3xs">
                 <MenuItem value="account">Account</MenuItem>
                 <MenuItem value="settings">Settings</MenuItem>
                 <MenuItem value="logout">Logout</MenuItem>

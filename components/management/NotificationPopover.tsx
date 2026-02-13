@@ -27,7 +27,7 @@ export const NotificationPopover = () => {
             </Popover.Trigger>
             <Portal>
                 <Popover.Positioner>
-                    <Popover.Content w={{ base: '3xs', md: 'sm' }}>
+                    <Popover.Content w="3xs">
                         <Popover.Body>okkkkkkkkkkk</Popover.Body>
                     </Popover.Content>
                 </Popover.Positioner>

@@ -60,8 +60,11 @@ export const OverView = <T,>({ label, items, columns, ...props }: OverViewProps<
                         borderColor="gray.200"
                     >
                         <Box
-                            p={2}
-                            w="fit"
+                            w={16}
+                            h={16}
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="center"
                             bgColor={`${item.color}/8`}
                             color={item.color}
                             rounded="md"

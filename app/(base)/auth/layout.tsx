@@ -23,7 +23,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 />
 
                 <Heading
-                    fontSize="4xl"
+                    fontSize="5xl"
                     fontWeight="semibold"
                 >
                     {process.env.NEXT_PUBLIC_APP_NAME}

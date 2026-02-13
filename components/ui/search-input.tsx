@@ -1,3 +1,5 @@
+'use client';
+
 import {
     ComboboxContent,
     ComboboxControl,
@@ -13,6 +15,7 @@ import {
     useFilter,
     useListCollection,
 } from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
 import { LuSearch } from 'react-icons/lu';
 
 export const SearchInput = ({
@@ -26,8 +29,9 @@ export const SearchInput = ({
     }[];
 }) => {
     const { contains } = useFilter({ sensitivity: 'base' });
+    const router = useRouter();
 
-    const { collection, filter } = useListCollection({
+    const { collection, filter, reset } = useListCollection({
         initialItems,
         filter: contains,
     });
@@ -39,6 +43,15 @@ export const SearchInput = ({
             collection={collection}
             onInputValueChange={(e) => filter(e.inputValue)}
             selectionBehavior="clear"
+            onSelect={(e) => {
+                collection.items.map((item) =>
+                    item.href && item.value === e.itemValue
+                        ? router.push(item.href)
+                        : undefined,
+                );
+
+                reset();
+            }}
         >
             <ComboboxControl showIndicator={false}>
                 <InputGroup startElement={<LuSearch />}>
@@ -51,8 +64,8 @@ export const SearchInput = ({
                 {collection.items.map((item) =>
                     item.href ? (
                         <Link
-                            href={item.href}
                             key={item.value}
+                            href={item.href}
                         >
                             <ComboboxItem
                                 item={item}

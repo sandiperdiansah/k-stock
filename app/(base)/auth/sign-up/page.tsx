@@ -13,7 +13,7 @@ const Page = () => {
                 >
                     Sign Up
                 </Heading>
-                <Text color="fg.muted">Welcome back! Please enter your details.</Text>
+                <Text color="fg.muted">Create your account to get started.</Text>
             </Box>
 
             <Box

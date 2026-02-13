@@ -11,7 +11,7 @@ const Page = () => {
                 >
                     Forgot Password
                 </Heading>
-                <Text color="fg.muted">Welcome back! Please enter your details.</Text>
+                <Text color="fg.muted">Enter your email to reset your password.</Text>
             </Box>
 
             <Box

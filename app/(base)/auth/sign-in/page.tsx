@@ -13,7 +13,9 @@ const Page = () => {
                 >
                     Sign In
                 </Heading>
-                <Text color="fg.muted">Welcome back! Please enter your details.</Text>
+                <Text color="fg.muted">
+                    Welcome back! Please enter your details to sign in.
+                </Text>
             </Box>
 
             <Box
@@ -39,7 +41,14 @@ const Page = () => {
                         display="flex"
                         justifyContent="end"
                     >
-                        <Link href="/auth/forgot-password">Forgot password</Link>
+                        <Link
+                            href="/auth/forgot-password"
+                            fontSize="sm"
+                            textUnderlineOffset={4}
+                            _hover={{ textDecor: 'underline' }}
+                        >
+                            Forgot password
+                        </Link>
                     </Box>
 
                     <Button w="full">Sign In</Button>

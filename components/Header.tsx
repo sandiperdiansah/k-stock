@@ -47,7 +47,7 @@ export const Header = () => {
             <Box
                 display="flex"
                 alignItems="center"
-                gap={{ base: 3, md: 4 }}
+                gap={4}
             >
                 <NotificationPopover />
                 <UserAvatar />

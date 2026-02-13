@@ -21,13 +21,13 @@ export const NotificationPopover = () => {
                         aria-label="show notifications"
                         style={{ cursor: 'pointer' }}
                     >
-                        <IoIosNotificationsOutline size={24} />
+                        <IoIosNotificationsOutline size={28} />
                     </button>
                 </Box>
             </Popover.Trigger>
             <Portal>
                 <Popover.Positioner>
-                    <Popover.Content>
+                    <Popover.Content w={{ base: '3xs', md: 'sm' }}>
                         <Popover.Body>okkkkkkkkkkk</Popover.Body>
                     </Popover.Content>
                 </Popover.Positioner>

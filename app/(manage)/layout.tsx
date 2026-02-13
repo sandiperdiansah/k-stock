@@ -111,11 +111,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             >
                 <Header />
 
-                <ScrollArea.Root size="md">
+                <ScrollArea.Root>
                     <ScrollArea.Viewport>
                         <ScrollArea.Content
                             as="main"
                             p={5}
+                            pb={{ base: 28, lg: 0 }}
                             spaceY={5}
                         >
                             {children}

@@ -1,6 +1,6 @@
-import { OverView } from '@/components/management/OverView';
 import { ProductLowStock } from '@/components/management/ProductLowStock';
 import { ProductTopSelling } from '@/components/management/ProductTopSelling';
+import { StatsOverview } from '@/components/stats-overview';
 import { formattedCurrency } from '@/utils/formatted';
 import { Grid, GridItem } from '@chakra-ui/react';
 import { Metadata } from 'next';
@@ -44,7 +44,7 @@ const Page = () => {
                 gap={5}
             >
                 <GridItem>
-                    <OverView
+                    <StatsOverview
                         label="Sales Overview"
                         items={[
                             {
@@ -79,7 +79,7 @@ const Page = () => {
                     />
                 </GridItem>
                 <GridItem>
-                    <OverView
+                    <StatsOverview
                         label="Inventory Summary"
                         columns={{ base: '1fr', md: '1fr 1fr' }}
                         items={[
@@ -106,7 +106,7 @@ const Page = () => {
                 gap={5}
             >
                 <GridItem>
-                    <OverView
+                    <StatsOverview
                         label="Purchase Overview"
                         items={[
                             {
@@ -139,7 +139,7 @@ const Page = () => {
                     />
                 </GridItem>
                 <GridItem>
-                    <OverView
+                    <StatsOverview
                         label="Product Summary"
                         columns={{ base: '1fr', md: '1fr 1fr' }}
                         items={[

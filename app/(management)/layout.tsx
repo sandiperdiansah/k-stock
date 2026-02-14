@@ -1,18 +1,19 @@
 import { Header } from '@/components/management/Header';
 import {
-    Sidebar,
     SidebarBody,
     SidebarContextProvider,
     SidebarFooter,
     SidebarHeader,
-} from '@/components/management/Sidebar';
+    SidebarMenu,
+    SidebarMenuItem,
+    SidebarRoot,
+} from '@/components/sidebar';
 import { Image } from '@/components/ui/image';
 import { Link } from '@/components/ui/link';
 import { ItemType } from '@/types';
 import { Box, ScrollArea, Span } from '@chakra-ui/react';
 import { FiBarChart2, FiBox, FiHome, FiShoppingCart, FiUsers } from 'react-icons/fi';
 import { LuStore } from 'react-icons/lu';
-import { version } from '../../package.json';
 
 const items: ItemType[] = [
     {
@@ -50,7 +51,7 @@ const items: ItemType[] = [
 const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <SidebarContextProvider>
-            <Sidebar>
+            <SidebarRoot>
                 <SidebarHeader>
                     <Link
                         href="/dashboard"
@@ -75,35 +76,27 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     </Link>
                 </SidebarHeader>
                 <SidebarBody>
-                    <Box spaceY={2}>
+                    <SidebarMenu>
                         {items.map((item, index) => (
-                            <Link
+                            <SidebarMenuItem
                                 key={index}
-                                href={item.href as string}
-                                display="flex"
-                                alignItems="center"
-                                p={3}
-                                gap={5}
-                                transition="backgrounds"
-                                rounded="md"
-                                color="fg.muted"
-                                _hover={{
-                                    bgColor: 'bg.subtle',
-                                }}
+                                asChild
                             >
-                                {item.icon && item.icon}
-                                <Span>{item.label}</Span>
-                            </Link>
+                                <Link href={item.href as string}>
+                                    {item.icon && item.icon}
+                                    <Span>{item.label}</Span>
+                                </Link>
+                            </SidebarMenuItem>
                         ))}
-                    </Box>
+                    </SidebarMenu>
                 </SidebarBody>
                 <SidebarFooter
                     color="fg.muted"
                     fontSize="sm"
                 >
-                    V {version}
+                    V {process.env.NEXT_PUBLIC_APP_VERSION}
                 </SidebarFooter>
-            </Sidebar>
+            </SidebarRoot>
 
             <Box
                 flex={1}

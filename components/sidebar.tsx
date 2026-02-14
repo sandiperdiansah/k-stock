@@ -46,11 +46,14 @@ export const SidebarContextProvider = ({ children }: { children: ReactNode }) =>
         setOpen(false);
     }, []);
 
+    useEffect(() => {}, []);
+
     return (
         <SidebarContext.Provider value={{ open, toggle, onOpen, onClose }}>
             <Box
                 h="vh"
                 display="flex"
+                alignItems="center"
                 overflow="hidden"
             >
                 {children}
@@ -69,13 +72,14 @@ export const useSidebarContext = (): SidebarContextProps => {
     return context;
 };
 
-export const Sidebar = (
+export const SidebarRoot = (
     props: Omit<BoxProps, 'as' | 'w' | 'width'> & {
         width?: number | string | { open?: number | string; closed?: number | string };
     },
 ) => {
     const { width = { open: 290, closed: 0 }, ...rest } = props;
-    const { open, onClose, onOpen } = useSidebarContext();
+    const { open, onClose, onOpen, toggle } = useSidebarContext();
+
     const resolvedWidth =
         typeof width === 'string' || typeof width === 'number'
             ? width
@@ -91,8 +95,6 @@ export const Sidebar = (
 
         const isMobile = window.matchMedia('(max-width: 1023px)').matches;
         const pathnameChanged = prevPathnameRef.current !== pathname;
-
-        console.log(prevPathnameRef.current);
 
         if (open && isMobile && pathnameChanged) {
             onClose();
@@ -111,6 +113,21 @@ export const Sidebar = (
         }
     }, [onOpen]);
 
+    useEffect(() => {
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.ctrlKey && e.key === ' ') {
+                e.preventDefault();
+                toggle();
+            }
+        };
+
+        window.addEventListener('keydown', (e) => onKeyDown(e));
+
+        return () => {
+            window.removeEventListener('keydown', (e) => onKeyDown(e));
+        };
+    }, [toggle]);
+
     return (
         <Box
             as="aside"
@@ -120,10 +137,10 @@ export const Sidebar = (
             flexDir="column"
             overflow="hidden"
             flexShrink={0}
-            role="navigation"
-            aria-label="Sidebar navigation"
-            aria-hidden={!open}
             transition="width .3s ease-in-out"
+            role="navigation"
+            aria-hidden={!open}
+            aria-label="Sidebar navigation"
             {...rest}
         />
     );
@@ -170,6 +187,33 @@ export const SidebarBody = ({ children, ...props }: Omit<ScrollAreaRootProps, 'a
                 </ScrollArea.Content>
             </ScrollArea.Viewport>
         </ScrollArea.Root>
+    );
+};
+
+export const SidebarMenu = ({ ...props }: BoxProps) => {
+    return (
+        <Box
+            spaceY={2}
+            {...props}
+        />
+    );
+};
+
+export const SidebarMenuItem = ({ ...props }: BoxProps) => {
+    return (
+        <Box
+            display="flex"
+            alignItems="center"
+            p={3}
+            gap={5}
+            transition="backgrounds"
+            rounded="md"
+            color="fg.muted"
+            _hover={{
+                bgColor: 'bg.subtle',
+            }}
+            {...props}
+        />
     );
 };
 

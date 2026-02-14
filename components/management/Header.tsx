@@ -1,6 +1,6 @@
 'use client';
 
-import { SidebarTrigger } from '@/components/management/Sidebar';
+import { SidebarTrigger } from '@/components/sidebar';
 import { SearchInput } from '@/components/ui/search-input';
 import { Box } from '@chakra-ui/react';
 import { NotificationPopover } from './NotificationPopover';

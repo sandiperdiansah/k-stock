@@ -7,6 +7,7 @@ const Page = () => {
             display="flex"
             alignItems="center"
             justifyContent="center"
+            minH="vh"
         >
             <Link href="/auth/sign-up">DAFTAR</Link>
         </Box>

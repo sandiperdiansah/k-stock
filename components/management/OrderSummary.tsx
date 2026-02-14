@@ -37,7 +37,10 @@ export const OrderSummary = () => {
                 </Span>
             </Box>
 
-            <Box p={{ lg: 5 }}>
+            <Box
+                py={{ lg: 5 }}
+                px={{ lg: 2 }}
+            >
                 <Chart.Root
                     chart={chart}
                     maxH="300px"

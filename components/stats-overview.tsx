@@ -1,7 +1,7 @@
 import { ItemType } from '@/types';
 import { Box, BoxProps, Grid, GridItem, GridProps, Span } from '@chakra-ui/react';
 
-type OverViewProps<T> = BoxProps & {
+export type StatsOverviewProps<T> = BoxProps & {
     label: string;
     items: (Omit<ItemType, 'href'> & {
         value: T;
@@ -11,7 +11,12 @@ type OverViewProps<T> = BoxProps & {
     columns?: GridProps['templateColumns'];
 };
 
-export const OverView = <T,>({ label, items, columns, ...props }: OverViewProps<T>) => {
+export const StatsOverview = <T,>({
+    label,
+    items,
+    columns,
+    ...props
+}: StatsOverviewProps<T>) => {
     return (
         <Box
             spaceY={6}

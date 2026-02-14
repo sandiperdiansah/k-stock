@@ -10,7 +10,7 @@ const inter = Inter({
 export const metadata: Metadata = {
     title: {
         default: 'K-Stock',
-        template: '%s | K-Stock',
+        template: 'K-Stock | %s',
     },
     description:
         'Sign up and manage your inventory online. Fast, simple, and accessible anywhere',

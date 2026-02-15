@@ -1,9 +1,56 @@
 'use client';
 
-import { Box, BoxProps, Button, IconButton, Input, InputGroup } from '@chakra-ui/react';
-import { LuListFilter, LuSearch } from 'react-icons/lu';
+import {
+    Box,
+    Button,
+    ButtonGroup,
+    IconButton,
+    Input,
+    InputGroup,
+    Pagination,
+    Skeleton,
+    Span,
+    Table,
+    TableRootProps,
+} from '@chakra-ui/react';
+import {
+    ColumnDef,
+    flexRender,
+    getCoreRowModel,
+    getPaginationRowModel,
+    PaginationState,
+    useReactTable,
+} from '@tanstack/react-table';
+import { useState } from 'react';
+import { LuChevronLeft, LuChevronRight, LuListFilter, LuSearch } from 'react-icons/lu';
 
-export const DataTable = ({ ...props }: BoxProps) => {
+export type DataTableProps<T> = Omit<TableRootProps, 'children'> & {
+    data: T[];
+    columns: ColumnDef<T>[];
+    form?: React.ReactNode;
+    allowToastNotification?: boolean;
+};
+
+export const DataTable = <T,>({ data, columns, ...props }: DataTableProps<T>) => {
+    const [pagination, setPagination] = useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 10,
+    });
+
+    const table = useReactTable({
+        data,
+        columns,
+        state: { pagination },
+        onPaginationChange: setPagination,
+        manualPagination: true,
+        getCoreRowModel: getCoreRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
+    });
+
+    if (!data) {
+        return <p>loading....</p>;
+    }
+
     return (
         <Box
             p={5}
@@ -12,8 +59,8 @@ export const DataTable = ({ ...props }: BoxProps) => {
             display="flex"
             flexDir="column"
             gap={6}
-            {...props}
         >
+            {/* header */}
             <Box
                 as="header"
                 display="flex"
@@ -65,8 +112,108 @@ export const DataTable = ({ ...props }: BoxProps) => {
                 </Box>
             </Box>
 
-            <Box minH="3xs"></Box>
-            <Box as="footer">ok</Box>
+            {/* table */}
+            <Box minH="3xs">
+                <Table.Root
+                    variant="outline"
+                    interactive
+                    native
+                    css={{
+                        rounded: 'sm',
+                        overflow: 'hidden',
+                        '& th': { px: 4, fontSize: 'md' },
+                        '& td': { px: 4, fontSize: 'sm' },
+                    }}
+                    {...props}
+                >
+                    <thead>
+                        {table.getHeaderGroups().map((headerGroup) => (
+                            <tr key={headerGroup.id}>
+                                {headerGroup.headers.map((header) => (
+                                    <th key={header.id}>
+                                        {header.isPlaceholder
+                                            ? null
+                                            : flexRender(
+                                                  header.column.columnDef.header,
+                                                  header.getContext(),
+                                              )}
+                                    </th>
+                                ))}
+                            </tr>
+                        ))}
+                    </thead>
+                    <tbody>
+                        {table.getRowModel().rows.map((row) => (
+                            <tr key={row.id}>
+                                {row.getVisibleCells().map((cell) => (
+                                    <td key={cell.id}>
+                                        {flexRender(
+                                            cell.column.columnDef.cell,
+                                            cell.getContext(),
+                                        )}
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table.Root>
+            </Box>
+
+            {/* pagination */}
+            <Box
+                as="footer"
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+            >
+                <Span>
+                    Page {pagination.pageIndex + 1} of {table.getPageCount()}
+                </Span>
+
+                <Pagination.Root
+                    count={data.length}
+                    pageSize={pagination.pageSize}
+                    page={pagination.pageIndex + 1}
+                    onPageChange={(e) => table.setPageIndex(e.page - 1)}
+                >
+                    <ButtonGroup
+                        variant="ghost"
+                        size="sm"
+                        wrap="wrap"
+                    >
+                        <Pagination.PrevTrigger asChild>
+                            <IconButton disabled={!table.getCanPreviousPage()}>
+                                <LuChevronLeft />
+                            </IconButton>
+                        </Pagination.PrevTrigger>
+
+                        <Pagination.Items
+                            render={(page) => (
+                                <IconButton
+                                    variant={{ base: 'ghost', _selected: 'outline' }}
+                                    onClick={() => table.setPageIndex(page.value - 1)}
+                                >
+                                    {page.value}
+                                </IconButton>
+                            )}
+                        />
+
+                        <Pagination.NextTrigger asChild>
+                            <IconButton disabled={!table.getCanNextPage()}>
+                                <LuChevronRight />
+                            </IconButton>
+                        </Pagination.NextTrigger>
+                    </ButtonGroup>
+                </Pagination.Root>
+            </Box>
+        </Box>
+    );
+};
+
+export const DataTableSkeleton = () => {
+    return (
+        <Box as="section">
+            <Skeleton h={8} />
         </Box>
     );
 };

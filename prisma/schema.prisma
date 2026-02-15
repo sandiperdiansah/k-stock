@@ -1,18 +1,6 @@
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
-}
-
-generator erd {
-  provider                  = "prisma-erd-generator"
-  output                    = "../generated/ERD.md"
-  disableEmoji              = true
-  includeRelationFromFields = true
-}
-
-generator valibot {
-  provider = "prisma-valibot-generator"
-  output   = "../generated/valibot"
+  output   = "./generated"
 }
 
 datasource db {

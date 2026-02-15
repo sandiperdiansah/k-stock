@@ -35,7 +35,9 @@ const OrderSummary = dynamic(() =>
     import('@/components/management/OrderSummary').then((md) => md.OrderSummary),
 );
 
-const Page = () => {
+const Page = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     return (
         <>
             <Grid

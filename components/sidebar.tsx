@@ -46,8 +46,6 @@ export const SidebarContextProvider = ({ children }: { children: ReactNode }) =>
         setOpen(false);
     }, []);
 
-    useEffect(() => {}, []);
-
     return (
         <SidebarContext.Provider value={{ open, toggle, onOpen, onClose }}>
             <Box

@@ -3,3 +3,9 @@ export type ItemType = {
     href?: string;
     icon?: React.ReactNode;
 };
+
+export type SearchParams = {
+    page?: string;
+    limit?: string;
+    search?: string;
+};

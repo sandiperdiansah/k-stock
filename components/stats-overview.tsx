@@ -1,5 +1,14 @@
 import { ItemType } from '@/types';
-import { Box, BoxProps, Grid, GridItem, GridProps, Span } from '@chakra-ui/react';
+import {
+    Box,
+    BoxProps,
+    Grid,
+    GridItem,
+    GridProps,
+    Skeleton,
+    SkeletonText,
+    Span,
+} from '@chakra-ui/react';
 
 export type StatsOverviewProps<T> = BoxProps & {
     label: string;
@@ -89,6 +98,62 @@ export const StatsOverview = <T,>({
                                     : String(item.value)}
                             </Span>
                             <Span fontSize="sm">{item.label}</Span>
+                        </Box>
+                    </GridItem>
+                ))}
+            </Grid>
+        </Box>
+    );
+};
+
+export const StatsOverviewSkeleton = ({ count = 2 }: { count?: number }) => {
+    return (
+        <Box
+            as="section"
+            bgColor="white"
+            rounded="md"
+            p={5}
+            pb={6}
+            spaceY={6}
+        >
+            <SkeletonText
+                noOfLines={1}
+                maxW={24}
+            />
+
+            <Grid
+                templateColumns={{
+                    base: '1fr',
+                    md: '1fr 1fr',
+                    lg: '1fr 1fr 1fr 1fr',
+                }}
+            >
+                {Array.from({ length: count }).map((_, index) => (
+                    <GridItem
+                        key={index}
+                        py={{ base: 4, lg: 2 }}
+                        px={4}
+                        spaceY={8}
+                    >
+                        <Skeleton
+                            w={16}
+                            h={16}
+                        />
+
+                        <Box
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="space-between"
+                            gap={6}
+                        >
+                            <SkeletonText
+                                noOfLines={1}
+                                maxW="20"
+                            />
+                            <SkeletonText
+                                noOfLines={1}
+                                maxW="20"
+                            />
                         </Box>
                     </GridItem>
                 ))}

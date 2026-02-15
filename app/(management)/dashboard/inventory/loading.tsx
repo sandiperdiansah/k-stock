@@ -1,10 +1,12 @@
-import { Box } from '@chakra-ui/react';
+import { DataTableSkeleton } from '@/components/data-table';
+import { StatsOverviewSkeleton } from '@/components/stats-overview';
 
 const Loading = () => {
     return (
-        <Box>
-            <p>Loading...</p>
-        </Box>
+        <>
+            <StatsOverviewSkeleton count={4} />
+            <DataTableSkeleton />
+        </>
     );
 };
 

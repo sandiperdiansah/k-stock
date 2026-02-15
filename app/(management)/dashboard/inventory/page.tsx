@@ -1,14 +1,23 @@
-import { DataTable } from '@/components/data-table';
 import { StatsOverview } from '@/components/stats-overview';
+import { SearchParams } from '@/types';
 import { Box } from '@chakra-ui/react';
 import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { FiAlertCircle, FiGrid, FiPackage, FiTrendingUp } from 'react-icons/fi';
 
 export const metadata: Metadata = {
     title: 'Inventory',
 };
 
-const Page = () => {
+const Table = dynamic(() =>
+    import('@/features/inventory/components/Table').then((md) => md.Table),
+);
+
+const Page = async ({ searchParams }: { searchParams: Promise<SearchParams> }) => {
+    const { page, limit, search } = await searchParams;
+
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     return (
         <>
             <Box as="section">
@@ -44,7 +53,7 @@ const Page = () => {
             </Box>
 
             <Box as="section">
-                <DataTable />
+                <Table />
             </Box>
         </>
     );
